@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>فہم قرآن — سورۃ البقرہ آیات ۲۱-۳۰ لفظی Quiz</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri+Quran&family=Noto+Nastaliq+Urdu:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --navy:   #0d1b2a;
+  --navy2:  #1b2d42;
+  --navy3:  #243b55;
+  --amber:  #e8a020;
+  --amber2: #f5c842;
+  --white:  #ffffff;
+  --soft:   #c8d8e8;
+  --muted:  #8899aa;
+  --red:    #e05555;
+  --green:  #3dbf7a;
+}
+body {
+  background: var(--navy);
+  min-height: 100vh;
+  font-family: 'Noto Nastaliq Urdu', serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 0 40px;
+  direction: rtl;
+}
+.header {
+  width: 100%;
+  background: linear-gradient(180deg, #0a1520 0%, var(--navy) 100%);
+  border-bottom: 1px solid rgba(232,160,32,0.25);
+  padding: 22px 20px 16px;
+  text-align: center;
+}
+.surah-label { font-family: sans-serif; font-size: 11px; letter-spacing: 3px; color: var(--amber); text-transform: uppercase; margin-bottom: 6px; }
+.surah-name  { font-family: 'Amiri Quran', serif; font-size: 32px; color: var(--white); line-height: 1.3; }
+.surah-sub   { font-family: 'Amiri Quran', serif; font-size: 16px; color: var(--amber2); margin-top: 4px; }
+.score-row { display: flex; gap: 10px; justify-content: center; padding: 14px 20px 0; width: 100%; }
+.score-chip { font-family: sans-serif; font-size: 13px; padding: 5px 16px; border-radius: 20px; display: flex; align-items: center; gap: 6px; font-weight: 600; }
+.chip-score  { background: rgba(232,160,32,0.15); color: var(--amber2); border: 1px solid var(--amber); }
+.chip-streak { background: rgba(255,100,0,0.15); color: #ff8c42; border: 1px solid #ff8c42; }
+.chip-num { font-size: 18px; }
+.prog-wrap { width: calc(100% - 40px); max-width: 500px; margin: 12px auto 0; }
+.prog-track { background: var(--navy2); border-radius: 6px; height: 5px; overflow: hidden; }
+.prog-fill  { height: 100%; background: linear-gradient(90deg, var(--amber), var(--amber2)); border-radius: 6px; transition: width .5s ease; }
+.prog-text  { font-family: sans-serif; font-size: 12px; color: var(--muted); text-align: center; margin-top: 5px; }
+.card-wrap { width: calc(100% - 32px); max-width: 500px; margin: 20px auto 0; }
+.card { background: var(--navy2); border-radius: 20px; overflow: hidden; border: 1px solid rgba(232,160,32,0.2); box-shadow: 0 12px 40px rgba(0,0,0,0.5); }
+.card-top { background: linear-gradient(135deg, rgba(232,160,32,0.15), rgba(232,160,32,0.05)); border-bottom: 1px solid rgba(232,160,32,0.2); padding: 10px 18px; display: flex; align-items: center; justify-content: space-between; }
+.q-badge { font-family: sans-serif; font-size: 12px; color: var(--amber); letter-spacing: 1px; }
+.ayat-tag { font-family: 'Amiri Quran', serif; font-size: 12px; color: var(--muted); background: rgba(255,255,255,0.05); padding: 3px 10px; border-radius: 10px; }
+.q-body { padding: 22px 18px 24px; }
+.q-label { font-family: sans-serif; font-size: 10px; color: var(--muted); letter-spacing: 2px; text-align: center; margin-bottom: 14px; text-transform: uppercase; }
+.word-box { font-family: 'Amiri Quran', serif; font-size: 52px; color: var(--white); text-align: center; line-height: 1.6; background: rgba(232,160,32,0.07); border: 1px solid rgba(232,160,32,0.2); border-radius: 18px; padding: 24px 18px; margin-bottom: 22px; direction: rtl; }
+.options-grid { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+.option-btn { width: 100%; padding: 14px 16px; background: var(--navy3); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: var(--soft); font-family: 'Noto Nastaliq Urdu', serif; font-size: 16px; line-height: 1.8; text-align: right; cursor: pointer; transition: all .2s; direction: rtl; display: flex; align-items: center; gap: 10px; }
+.option-btn:hover:not(:disabled) { border-color: var(--amber); background: rgba(232,160,32,0.08); transform: translateY(-1px); }
+.option-btn.correct { background: rgba(61,191,122,0.15); border-color: var(--green); color: var(--green); }
+.option-btn.wrong   { background: rgba(224,85,85,0.15);  border-color: var(--red);   color: var(--red); }
+.option-btn:disabled { cursor: not-allowed; }
+.opt-letter { font-family: sans-serif; font-size: 12px; font-weight: 700; width: 28px; height: 28px; border-radius: 50%; background: rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--muted); }
+.option-btn.correct .opt-letter { background: var(--green); color: var(--navy); }
+.option-btn.wrong   .opt-letter { background: var(--red);   color: var(--white); }
+.feedback-box { display: none; padding: 12px 16px; border-radius: 12px; margin-bottom: 14px; font-size: 14px; line-height: 1.9; text-align: right; direction: rtl; }
+.feedback-box.show { display: block; }
+.feedback-box.correct { background: rgba(61,191,122,0.1); border: 1px solid var(--green); color: var(--green); }
+.feedback-box.wrong   { background: rgba(224,85,85,0.1);  border: 1px solid var(--red);   color: var(--soft); }
+.btn-next { width: 100%; padding: 13px; background: var(--amber); color: var(--navy); border: none; border-radius: 12px; font-family: 'Noto Nastaliq Urdu', serif; font-size: 16px; font-weight: 700; cursor: pointer; transition: all .2s; box-shadow: 0 4px 0 rgba(0,0,0,0.3); display: none; }
+.btn-next.show { display: block; }
+.btn-next:hover { background: var(--amber2); transform: translateY(-1px); }
+.complete { display: none; width: calc(100% - 32px); max-width: 500px; margin: 30px auto 0; background: var(--navy2); border-radius: 24px; padding: 36px 24px; text-align: center; border: 1px solid rgba(232,160,32,0.2); }
+.complete.show { display: block; }
+.trophy-ring { width: 90px; height: 90px; border-radius: 50%; background: rgba(232,160,32,0.1); border: 2px solid var(--amber); margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-size: 40px; }
+.complete h2 { font-family: 'Amiri Quran', serif; font-size: 26px; color: var(--amber2); margin-bottom: 8px; }
+.complete p  { color: var(--soft); font-size: 15px; line-height: 1.9; margin-bottom: 22px; }
+.final-stats { display: flex; gap: 12px; justify-content: center; margin-bottom: 24px; }
+.fstat { background: rgba(255,255,255,0.05); border-radius: 14px; padding: 14px 20px; min-width: 80px; }
+.fstat .fn { font-size: 30px; font-weight: bold; font-family: sans-serif; }
+.fstat .fl { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.fn-g { color: var(--green); }
+.fn-r { color: var(--red); }
+.fn-a { color: var(--amber2); }
+.btn-restart { background: var(--amber); color: var(--navy); border: none; border-radius: 14px; padding: 14px 32px; font-family: 'Noto Nastaliq Urdu', serif; font-size: 17px; font-weight: 700; cursor: pointer; box-shadow: 0 4px 0 rgba(0,0,0,0.3); }
+.footer { font-family: sans-serif; font-size: 11px; color: var(--muted); text-align: center; margin-top: 30px; letter-spacing: 1px; }
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="surah-label">فہم قرآن — لفظ بہ لفظ Quiz</div>
+  <div class="surah-name">سورۃ البقرہ</div>
+  <div class="surah-sub">آیات ۲۱ تا ۳۰ — ہر لفظ کا مطلب</div>
+</div>
+<div class="score-row">
+  <div class="score-chip chip-score"><span class="chip-num" id="score">0</span> سکور ✅</div>
+  <div class="score-chip chip-streak"><span class="chip-num" id="streak">0</span> 🔥 سٹریک</div>
+</div>
+<div class="prog-wrap">
+  <div class="prog-track"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
+  <div class="prog-text" id="prog-text">سوال ۱ / ...</div>
+</div>
+<div class="card-wrap" id="card-wrap">
+  <div class="card">
+    <div class="card-top">
+      <div class="q-badge" id="q-badge">سوال ۱</div>
+      <div class="ayat-tag" id="ayat-tag">آیت ۲۱</div>
+    </div>
+    <div class="q-body">
+      <div class="q-label">اس لفظ کا صحیح مطلب چنیں</div>
+      <div class="word-box" id="word-box"></div>
+      <div class="options-grid" id="options-grid"></div>
+      <div class="feedback-box" id="feedback-box"></div>
+      <button class="btn-next" id="btn-next" onclick="nextQ()">اگلا سوال ←</button>
+    </div>
+  </div>
+</div>
+<div class="complete" id="complete-screen">
+  <div class="trophy-ring">🏆</div>
+  <h2>مبارک ہو!</h2>
+  <p>آپ نے سورۃ البقرہ آیات ۲۱ تا ۳۰ کا<br>لفظ بہ لفظ Quiz مکمل کر لیا<br>اللہ آپ کو قرآن سمجھنے کی توفیق دے۔ آمین 🤲</p>
+  <div class="final-stats">
+    <div class="fstat"><div class="fn fn-g" id="f-correct">0</div><div class="fl">درست ✅</div></div>
+    <div class="fstat"><div class="fn fn-r" id="f-wrong">0</div><div class="fl">غلط ❌</div></div>
+    <div class="fstat"><div class="fn fn-a" id="f-pct">0%</div><div class="fl">اسکور</div></div>
+  </div>
+  <button class="btn-restart" onclick="restart()">🔄 دوبارہ کھیلیں</button>
+</div>
+<div class="footer">فہم قرآن کورس — استاذہ ابدہ © 2025</div>
+
+<script>
+const allWords = [
+  // آیت ۲۱
+  {ayat:"آیت ۲۱", word:"يَا أَيُّهَا النَّاسُ", correct:"اے لوگو", wrong:["اے مومنو","اے کافرو","اے فرشتو"]},
+  {ayat:"آیت ۲۱", word:"اعْبُدُوا", correct:"عبادت کرو", wrong:["نماز پڑھو","روزہ رکھو","توبہ کرو"]},
+  {ayat:"آیت ۲۱", word:"خَلَقَكُمْ", correct:"جس نے تمہیں پیدا کیا", wrong:["جس نے تمہیں رزق دیا","جس نے تمہیں ہدایت دی","جس نے تمہیں معاف کیا"]},
+  {ayat:"آیت ۲۱", word:"لَعَلَّكُمْ تَتَّقُونَ", correct:"تاکہ تم پرہیزگار بن جاؤ", wrong:["تاکہ تم کامیاب ہو","تاکہ تم جنت پاؤ","تاکہ تم ایمان لاؤ"]},
+  // آیت ۲۲
+  {ayat:"آیت ۲۲", word:"فِرَاشًا", correct:"بچھونا / فرش", wrong:["چھت","دروازہ","گھر"]},
+  {ayat:"آیت ۲۲", word:"بِنَاءً", correct:"چھت / عمارت", wrong:["بچھونا","دیوار","زمین"]},
+  {ayat:"آیت ۲۲", word:"الثَّمَرَاتِ", correct:"پھل", wrong:["پانی","روشنی","ہوا"]},
+  {ayat:"آیت ۲۲", word:"أَندَادًا", correct:"شریک / ہمسر", wrong:["دشمن","دوست","مددگار"]},
+  // آیت ۲۳
+  {ayat:"آیت ۲۳", word:"رَيْبٍ", correct:"شک", wrong:["ڈر","غم","خوشی"]},
+  {ayat:"آیت ۲۳", word:"عَبْدِنَا", correct:"ہمارے بندے", wrong:["ہمارے نبی","ہمارے رسول","ہمارے فرشتے"]},
+  {ayat:"آیت ۲۳", word:"بِسُورَةٍ", correct:"ایک سورت", wrong:["ایک آیت","ایک لفظ","ایک کتاب"]},
+  {ayat:"آیت ۲۳", word:"شُهَدَاءَكُم", correct:"اپنے گواہ", wrong:["اپنے دوست","اپنے دشمن","اپنے ساتھی"]},
+  // آیت ۲۴
+  {ayat:"آیت ۲۴", word:"وَقُودُهَا", correct:"جس کا ایندھن", wrong:["جس کی آگ","جس کا دھواں","جس کی تپش"]},
+  {ayat:"آیت ۲۴", word:"الْحِجَارَةُ", correct:"پتھر", wrong:["لکڑی","لوہا","مٹی"]},
+  {ayat:"آیت ۲۴", word:"أُعِدَّتْ", correct:"تیار کی گئی", wrong:["بنائی گئی","لکھی گئی","بھیجی گئی"]},
+  {ayat:"آیت ۲۴", word:"لِلْكَافِرِينَ", correct:"کافروں کے لیے", wrong:["مومنوں کے لیے","گنہگاروں کے لیے","منافقوں کے لیے"]},
+  // آیت ۲۵
+  {ayat:"آیت ۲۵", word:"وَبَشِّرِ", correct:"اور خوشخبری دو", wrong:["اور ڈراؤ","اور بتاؤ","اور پڑھو"]},
+  {ayat:"آیت ۲۵", word:"جَنَّاتٍ", correct:"جنتیں / باغات", wrong:["محلات","دریا","پہاڑ"]},
+  {ayat:"آیت ۲۵", word:"الْأَنْهَارُ", correct:"نہریں", wrong:["دریا","سمندر","چشمے"]},
+  {ayat:"آیت ۲۵", word:"أَزْوَاجٌ مُّطَهَّرَةٌ", correct:"پاک بیویاں", wrong:["پاک فرشتے","پاک لباس","پاک مقام"]},
+  {ayat:"آیت ۲۵", word:"خَالِدُونَ", correct:"ہمیشہ رہنے والے", wrong:["جانے والے","آنے والے","لوٹنے والے"]},
+  // آیت ۲۶
+  {ayat:"آیت ۲۶", word:"بَعُوضَةً", correct:"مچھر", wrong:["مکھی","چیونٹی","شہد کی مکھی"]},
+  {ayat:"آیت ۲۶", word:"يُضِلُّ", correct:"گمراہ کرتا ہے", wrong:["ہدایت دیتا ہے","سزا دیتا ہے","معاف کرتا ہے"]},
+  {ayat:"آیت ۲۶", word:"الْفَاسِقِينَ", correct:"فاسق / نافرمان لوگ", wrong:["مومن لوگ","کافر لوگ","صالح لوگ"]},
+  // آیت ۲۷
+  {ayat:"آیت ۲۷", word:"يَنقُضُونَ", correct:"توڑتے ہیں", wrong:["بناتے ہیں","مانتے ہیں","پڑھتے ہیں"]},
+  {ayat:"آیت ۲۷", word:"عَهْدَ اللَّهِ", correct:"اللہ کا عہد", wrong:["اللہ کی نعمت","اللہ کی رحمت","اللہ کا حکم"]},
+  {ayat:"آیت ۲۷", word:"يُوصَلَ", correct:"جوڑا جائے", wrong:["کاٹا جائے","توڑا جائے","بھیجا جائے"]},
+  {ayat:"آیت ۲۷", word:"الْخَاسِرُونَ", correct:"نقصان اٹھانے والے", wrong:["کامیاب لوگ","فائدہ اٹھانے والے","ہدایت یافتہ"]},
+  // آیت ۲۸
+  {ayat:"آیت ۲۸", word:"كَيْفَ تَكْفُرُونَ", correct:"تم کیسے انکار کرتے ہو", wrong:["تم کیسے ایمان لاتے ہو","تم کیوں روتے ہو","تم کہاں جاتے ہو"]},
+  {ayat:"آیت ۲۸", word:"أَمْوَاتًا", correct:"مردہ / بے جان", wrong:["زندہ","بیمار","کمزور"]},
+  {ayat:"آیت ۲۸", word:"فَأَحْيَاكُمْ", correct:"پھر اس نے زندہ کیا", wrong:["پھر اس نے مارا","پھر اس نے بنایا","پھر اس نے بھیجا"]},
+  {ayat:"آیت ۲۸", word:"تُرْجَعُونَ", correct:"لوٹائے جاؤ گے", wrong:["بھیجے جاؤ گے","اٹھائے جاؤ گے","بلائے جاؤ گے"]},
+  // آیت ۲۹
+  {ayat:"آیت ۲۹", word:"جَمِيعًا", correct:"سب / سارا", wrong:["کچھ","تھوڑا","ایک"]},
+  {ayat:"آیت ۲۹", word:"اسْتَوَىٰ", correct:"توجہ فرمائی / متوجہ ہوا", wrong:["اتر گیا","چلا گیا","پلٹ گیا"]},
+  {ayat:"آیت ۲۹", word:"سَبْعَ سَمَاوَاتٍ", correct:"سات آسمان", wrong:["سات زمینیں","سات دریا","سات پہاڑ"]},
+  {ayat:"آیت ۲۹", word:"عَلِيمٌ", correct:"جاننے والا / علم والا", wrong:["قادر","رحیم","غفور"]},
+  // آیت ۳۰
+  {ayat:"آیت ۳۰", word:"خَلِيفَةً", correct:"خلیفہ / نائب", wrong:["نبی","رسول","فرشتہ"]},
+  {ayat:"آیت ۳۰", word:"يُفْسِدُ فِيهَا", correct:"فساد کرے اس میں", wrong:["اصلاح کرے","آباد کرے","خوشی لائے"]},
+  {ayat:"آیت ۳۰", word:"يَسْفِكُ الدِّمَاءَ", correct:"خون بہائے", wrong:["پانی بہائے","آنسو بہائے","پسینہ بہائے"]},
+  {ayat:"آیت ۳۰", word:"نُسَبِّحُ بِحَمْدِكَ", correct:"تیری تعریف کے ساتھ تسبیح کرتے ہیں", wrong:["تجھ سے مانگتے ہیں","تجھ سے ڈرتے ہیں","تیری عبادت کرتے ہیں"]},
+  {ayat:"آیت ۳۰", word:"نُقَدِّسُ", correct:"پاکیزگی بیان کرتے ہیں", wrong:["عبادت کرتے ہیں","تسبیح کرتے ہیں","دعا کرتے ہیں"]},
+  {ayat:"آیت ۳۰", word:"مَا لَا تَعْلَمُونَ", correct:"جو تم نہیں جانتے", wrong:["جو تم جانتے ہو","جو تم دیکھتے ہو","جو تم سنتے ہو"]}
+];
+
+let questions=[], cur=0, scoreC=0, wrongC=0, streak=0;
+function shuffle(arr){ return arr.sort(()=>Math.random()-0.5); }
+function urduNum(n){ return String(n).split('').map(c=>'۰۱۲۳۴۵۶۷۸۹'[+c]??c).join(''); }
+function makeOptions(q){ return shuffle([{text:q.correct,isCorrect:true},...q.wrong.map(w=>({text:w,isCorrect:false}))]); }
+function init(){ questions=shuffle([...allWords]); cur=0; scoreC=0; wrongC=0; streak=0; updateUI(); renderQ(); }
+function renderQ(){
+  const q=questions[cur]; const opts=makeOptions(q);
+  const letters=['الف','ب','ج','د'];
+  document.getElementById('q-badge').textContent='سوال '+urduNum(cur+1)+' / '+urduNum(questions.length);
+  document.getElementById('ayat-tag').textContent=q.ayat;
+  document.getElementById('word-box').textContent=q.word;
+  document.getElementById('prog-fill').style.width=(cur/questions.length*100)+'%';
+  document.getElementById('prog-text').textContent='سوال '+urduNum(cur+1)+' / '+urduNum(questions.length);
+  const grid=document.getElementById('options-grid');
+  grid.innerHTML='';
+  opts.forEach((opt,i)=>{
+    const btn=document.createElement('button');
+    btn.className='option-btn';
+    btn.innerHTML=`<span class="opt-letter">${letters[i]}</span><span>${opt.text}</span>`;
+    btn.onclick=()=>checkAnswer(opt.isCorrect,opt.text,q.correct,btn);
+    grid.appendChild(btn);
+  });
+  const fb=document.getElementById('feedback-box');
+  fb.className='feedback-box'; fb.textContent='';
+  document.getElementById('btn-next').className='btn-next';
+}
+function checkAnswer(isCorrect,chosen,correct,clickedBtn){
+  document.querySelectorAll('.option-btn').forEach(b=>{
+    b.disabled=true;
+    const txt=b.querySelector('span:last-child').textContent;
+    if(txt===correct) b.classList.add('correct');
+    if(b===clickedBtn && !isCorrect) b.classList.add('wrong');
+  });
+  const fb=document.getElementById('feedback-box');
+  if(isCorrect){ scoreC++; streak++; fb.className='feedback-box correct show'; fb.innerHTML='✅ بالکل درست! شاباش! 🌟'; }
+  else{ wrongC++; streak=0; fb.className='feedback-box wrong show'; fb.innerHTML='❌ غلط جواب<br><b style="color:var(--amber2)">درست مطلب:</b> '+correct; }
+  updateUI();
+  document.getElementById('btn-next').className='btn-next show';
+}
+function updateUI(){ document.getElementById('score').textContent=scoreC; document.getElementById('streak').textContent=streak; }
+function nextQ(){ cur++; if(cur<questions.length){ renderQ(); } else { showComplete(); } }
+function showComplete(){
+  document.getElementById('card-wrap').style.display='none';
+  document.getElementById('f-correct').textContent=scoreC;
+  document.getElementById('f-wrong').textContent=wrongC;
+  document.getElementById('f-pct').textContent=Math.round(scoreC/questions.length*100)+'%';
+  document.getElementById('complete-screen').classList.add('show');
+  document.getElementById('prog-fill').style.width='100%';
+}
+function restart(){ document.getElementById('card-wrap').style.display='block'; document.getElementById('complete-screen').classList.remove('show'); init(); }
+init();
+</script>
+</body>
+</html>
